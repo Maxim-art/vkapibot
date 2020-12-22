@@ -1,0 +1,23 @@
+{
+  "name": "vkbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js > log-file.txt"
+  },
+  "dependencies": {
+    "vk-io": "^4.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      ".git",
+      "package.json",
+      "yarn.lock",
+      "node_modules/*"
+    ]
+  }
+}

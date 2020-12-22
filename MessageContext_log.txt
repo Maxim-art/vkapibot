@@ -1,0 +1,61 @@
+MessageContext {
+  id: 0,
+  conversationMessageId: 636,
+  peerId: 2000000002,
+  peerType: 'chat',
+  senderId: 9257362,
+  senderType: 'user',
+  createdAt: 1608590163,
+  updatedAt: undefined,
+  text: 'd',
+  forwards: MessageForwardsCollection(0) [],
+  attachments: [],
+  isOutbox: false,
+  type: 'message',
+  subTypes: [
+    'message_new'
+  ],
+  state: {}
+}
+MessageContext {
+  id: 0,
+  conversationMessageId: 637,
+  peerId: 2000000002,
+  peerType: 'chat',
+  senderId: 9257362,
+  senderType: 'user',
+  createdAt: 1608590193,
+  updatedAt: undefined,
+  text: undefined,
+  eventType: 'chat_invite_user',
+  eventMemberId: 57561167,
+  eventText: undefined,
+  eventEmail: undefined,
+  forwards: MessageForwardsCollection(0) [],
+  attachments: [],
+  isOutbox: false,
+  type: 'message',
+  subTypes: [
+    'chat_invite_user'
+  ],
+  state: {}
+}
+MessageContext {
+  id: 0,
+  conversationMessageId: 638,
+  peerId: 2000000002,
+  peerType: 'chat',
+  senderId: 57561167,
+  senderType: 'user',
+  createdAt: 1608590227,
+  updatedAt: undefined,
+  text: 's',
+  forwards: MessageForwardsCollection(0) [],
+  attachments: [],
+  isOutbox: false,
+  type: 'message',
+  subTypes: [
+    'message_new'
+  ],
+  state: {}
+}
