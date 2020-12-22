@@ -2,11 +2,52 @@
 // https://github.com/negezor/vk-io/blob/d816b2c6/packages/vk-io/src/structures/contexts/message.ts#L322
 const { VK, Keyboard, getRandomId } = require("vk-io");
 const fs = require("fs");
+const mongoose = require("mongoose");
+
+const mongoUrl =
+  "";
+
+(async () => {
+  const dbConnection = await mongoose.connect(mongoUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    // useFindAndModify: false,
+    // useCreateIndex: true,
+  });
+
+  const Cat = dbConnection.model("Cat", { name: String });
+  const Some = dbConnection.model("Some", { name: String });
+
+  // const kitty = new Some({ name: "Zildjian" });
+  // await kitty.save();
+
+  // await Some.updateOne(
+  //   { name: "Zildjian" },
+  //   { name: "Z1s11ildjian" },
+  //   function (err, result) {
+  //     if (err) return console.log(err);
+  //     // console.log(result);
+  //   }
+  // );
+
+  // Kitten.find({ name: /^fluff/ }, callback);
+  await Cat.find({}, async function (err, docs) {
+    if (err) return console.log(err);
+    console.log(docs);
+  });
+
+  await Some.find({}, async function (err, docs) {
+    if (err) return console.log(err);
+    console.log(docs);
+  });
+
+  await dbConnection.disconnect();
+})();
 
 const GROUP_ID = 102364255;
 const vk = new VK({
-  token:
-    "",
+  // token:
+  //   "",
   apiMode: "parallel", // sequential parallel
   pollingGroupId: GROUP_ID,
   apiLimit: 20,
@@ -162,11 +203,11 @@ vk.updates.on("message", async (context, next) => {
 /*
   ------------------------------------------------
 */
-const run = async () => {
-  // await vk.updates.startPolling();
-  await vk.updates.start();
-};
-run().catch(console.error);
+// const run = async () => {
+//   // await vk.updates.startPolling();
+//   await vk.updates.start();
+// };
+// run().catch(console.error);
 
 // vk.updates.start(); // console.log(vk.updates.isStarted);
 // https://regex101.com/r/SqDccx/1/

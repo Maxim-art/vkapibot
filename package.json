@@ -4,9 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon index.js > log-file.txt"
+    "dev": "nodemon index.js"
   },
   "dependencies": {
+    "mongoose": "^5.11.8",
     "vk-io": "^4.1.2"
   },
   "devDependencies": {
