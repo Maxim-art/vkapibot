@@ -1,11 +1,11 @@
 // https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/contexts/message.md
 // https://github.com/negezor/vk-io/blob/d816b2c6/packages/vk-io/src/structures/contexts/message.ts#L322
+require("dotenv").config();
 const { VK, Keyboard, getRandomId } = require("vk-io");
 const fs = require("fs");
 const mongoose = require("mongoose");
 
-const mongoUrl =
-  "";
+const mongoUrl = process.env.MONGO_URL;
 
 (async () => {
   const dbConnection = await mongoose.connect(mongoUrl, {
@@ -46,8 +46,7 @@ const mongoUrl =
 
 const GROUP_ID = 102364255;
 const vk = new VK({
-  // token:
-  //   "",
+  token: process.env.VK_TOKEN,
   apiMode: "parallel", // sequential parallel
   pollingGroupId: GROUP_ID,
   apiLimit: 20,
