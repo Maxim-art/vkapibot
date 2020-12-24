@@ -53,6 +53,7 @@ const vk = new VK({
 const hearManager = new HearManager();
 
 vk.updates.on("message_new", (context, next) => {
+  // console.log(context);
   const { messagePayload } = context;
   context.state.command =
     messagePayload && messagePayload.command ? messagePayload.command : null;
@@ -60,9 +61,70 @@ vk.updates.on("message_new", (context, next) => {
 });
 vk.updates.on("message_new", hearManager.middleware);
 
+const hearCommand = (name, conditions, handle) => {
+  if (typeof handle !== "function") {
+    handle = conditions;
+    conditions = [`/${name}`];
+  }
+
+  if (!Array.isArray(conditions)) {
+    conditions = [conditions];
+  }
+
+  hearManager.hear(
+    [(text, { state }) => state.command === name, ...conditions],
+    handle
+  );
+};
+
+hearCommand("start", ["/t1est"], (context, next) => {
+  // context.state.command = "help";
+  return Promise.all([
+    context.send({
+      message: `Отправляю клавиатуру!`,
+      keyboard: Keyboard.builder()
+        .textButton({
+          label: "Обновить клаву 🎮",
+          payload: {
+            command: "start",
+          },
+        })
+        .row()
+        .textButton({
+          label: "f1 🙀",
+          payload: {
+            answer: "ans 1 🙀",
+            command: "setAnswer",
+          },
+          color: Keyboard.PRIMARY_COLOR,
+        })
+        .textButton({
+          label: "f2 👀",
+          payload: {
+            answer: "ans 2 👀",
+            command: "setAnswer",
+          },
+          color: Keyboard.PRIMARY_COLOR,
+        }),
+    }),
+    next(),
+  ]);
+});
+
+hearCommand("setAnswer", ["/ответ"], (context, next) => {
+  // console.log(context.messagePayload.answer);
+  return Promise.all([
+    context.send({
+      message: `Получено! ${context.messagePayload.answer}`,
+    }),
+    next(),
+  ]);
+});
+
 hearManager.hear(
   (value, context) => {
-    return value.startsWith("!start");
+    // console.log(value, context);
+    return value.startsWith("temp");
   },
   async (context, next) => {
     //   if (
@@ -78,6 +140,39 @@ hearManager.hear(
     // });
     // await context.send(`*id${context.senderId} (${user[0].first_name})`);
     // await context.send(`Ответ для *id${context.senderId} (Пользователя)`);
+
+    await context.send({
+      message: `Отправка клавиватуры`,
+      keyboard: Keyboard.builder()
+        .textButton({
+          label: "The help",
+          payload: {
+            command: "start",
+          },
+        })
+        .row()
+        .textButton({
+          label: "The current date",
+          payload: {
+            command: "time",
+          },
+        })
+        .row()
+        .textButton({
+          label: "Cat photo",
+          payload: {
+            command: "cat",
+          },
+          color: Keyboard.PRIMARY_COLOR,
+        })
+        .textButton({
+          label: "Cat purring",
+          payload: {
+            command: "purr",
+          },
+          color: Keyboard.PRIMARY_COLOR,
+        }),
+    });
 
     await next();
   }
