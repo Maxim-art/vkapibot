@@ -1,6 +1,13 @@
 require("dotenv").config();
+// import dotenv from "dotenv";
+// dotenv.config();
 const { VK, Keyboard, getRandomId } = require("vk-io");
+// import { VK, Keyboard, getRandomId } from "vk-io";
 const { HearManager } = require("@vk-io/hear");
+// import { HearManager } from "@vk-io/hear";
+const { generateKeyboard } = require("./src/generateKeyboard");
+// import { generateKeyboard } from "./src/generateKeyboard.js";
+
 // const fs = require("fs");
 // const mongoose = require("mongoose");
 
@@ -82,37 +89,13 @@ hearCommand("start", ["/t1est"], (context, next) => {
   return Promise.all([
     context.send({
       message: `Отправляю клавиатуру!`,
-      keyboard: Keyboard.builder()
-        .textButton({
-          label: "Обновить клаву 🎮",
-          payload: {
-            command: "start",
-          },
-        })
-        .row()
-        .textButton({
-          label: "f1 🙀",
-          payload: {
-            answer: "ans 1 🙀",
-            command: "setAnswer",
-          },
-          color: Keyboard.PRIMARY_COLOR,
-        })
-        .textButton({
-          label: "f2 👀",
-          payload: {
-            answer: "ans 2 👀",
-            command: "setAnswer",
-          },
-          color: Keyboard.PRIMARY_COLOR,
-        }),
+      keyboard: generateKeyboard,
     }),
     next(),
   ]);
 });
 
 hearCommand("setAnswer", ["/ответ"], (context, next) => {
-  // console.log(context.messagePayload.answer);
   return Promise.all([
     context.send({
       message: `Получено! ${context.messagePayload.answer}`,
@@ -123,7 +106,6 @@ hearCommand("setAnswer", ["/ответ"], (context, next) => {
 
 hearManager.hear(
   (value, context) => {
-    // console.log(value, context);
     return value.startsWith("temp");
   },
   async (context, next) => {
@@ -140,39 +122,6 @@ hearManager.hear(
     // });
     // await context.send(`*id${context.senderId} (${user[0].first_name})`);
     // await context.send(`Ответ для *id${context.senderId} (Пользователя)`);
-
-    await context.send({
-      message: `Отправка клавиватуры`,
-      keyboard: Keyboard.builder()
-        .textButton({
-          label: "The help",
-          payload: {
-            command: "start",
-          },
-        })
-        .row()
-        .textButton({
-          label: "The current date",
-          payload: {
-            command: "time",
-          },
-        })
-        .row()
-        .textButton({
-          label: "Cat photo",
-          payload: {
-            command: "cat",
-          },
-          color: Keyboard.PRIMARY_COLOR,
-        })
-        .textButton({
-          label: "Cat purring",
-          payload: {
-            command: "purr",
-          },
-          color: Keyboard.PRIMARY_COLOR,
-        }),
-    });
 
     await next();
   }
