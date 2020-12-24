@@ -39,6 +39,13 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.14.tgz#f7fd5f3cc8521301119f63910f0fb965c7d761ae"
   integrity sha512-UHnOPWVWV1z+VV8k6L1HhG7UbGBgIdghqF3l9Ny9ApPghbjICXkUJSd/b9gOgQfjM1r+37cipdw/HJ3F6ICEnQ==
 
+"@vk-io/hear@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@vk-io/hear/-/hear-1.0.2.tgz#516c6b1f75915610742055c2110209d00d571dc6"
+  integrity sha512-fri4S2wWMmwM9eZ4aGMVi1lKlOsClhEyVX3u7KcuuIxxtNSzun8Sp3O+TN+G1KK8DTnZKF4IzLIanLPtBuOMjA==
+  dependencies:
+    middleware-io "^2.5.0"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"

@@ -1,3 +1,6 @@
+// https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/contexts/message.md
+// https://github.com/negezor/vk-io/blob/d816b2c6/packages/vk-io/src/structures/contexts/message.ts#L322
+
 const { VK, Keyboard } = require("vk-io");
 const fs = require("fs");
 
@@ -101,7 +104,8 @@ vk.updates.hear(/^\/клава$/i, async (context) => {
   ------------------------------------------------
 */
 const run = async () => {
-  await vk.updates.startPolling();
+  // await vk.updates.startPolling();
+  await vk.updates.start();
 };
 run().catch(console.error);
 // vk.updates.start(); // console.log(vk.updates.isStarted);
