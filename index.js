@@ -95,14 +95,18 @@ hearCommand("start", ["/t1est"], (context, next) => {
   ]);
 });
 
-hearCommand("setAnswer", ["/ответ"], (context, next) => {
-  return Promise.all([
-    context.send({
-      message: `Получено! ${context.messagePayload.answer}`,
-    }),
-    next(),
-  ]);
-});
+hearCommand(
+  "setAnswer",
+  /*["/ответ"],*/ (context, next) => {
+    if (context.messagePayload)
+      return Promise.all([
+        context.send({
+          message: `Получено! ${context.messagePayload.answer}`,
+        }),
+        next(),
+      ]);
+  }
+);
 
 hearManager.hear(
   (value, context) => {
@@ -128,3 +132,13 @@ hearManager.hear(
 );
 
 vk.updates.start().catch(console.error);
+// vk.updates
+//   .startWebhook({
+//     path: "Asafp456dghv",
+//     port: '80',
+//     host: 'localhost',
+//     next(req, res) {
+//       console.log("139", req, res);
+//     },
+//   })
+//   .catch(console.error);
